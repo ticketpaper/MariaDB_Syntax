@@ -1,9 +1,9 @@
 --DDL (데이터 정의어)
 --데이터베이스나 테이블 등을 생성, 삭제하거나 구조를 변경
+
 --CREATE (데이터베이스, 테이블 등을 생성)
 CREATE DATABASE board;
 USE board;
-
 -- author 테이블 생성
 CREATE TABLE author(id INT, 
                     name VARCHAR(255), 
@@ -24,7 +24,7 @@ WHERE TABLE_NAME = 'posts'; -- 테이블 참조관계 및 제약조건 조회
 
 SHOW INDEX FROM posts; -- 테이블 index 조회
 -- 제약조건 정보조회와 인덱스조회는 상당수 일치
--- 인덱스 타입 : BTREE : 트리구조
+-- 인덱스 타입 : BTREE : 트리구조 -> 성능 관련
 
 SHOW CREATE TABLE posts; -- 테이블 생성문 조회
 -- CREATE TABLE `posts` (
@@ -53,7 +53,7 @@ ALTER TABLE posts RENAME post;
 ALTER TABLE 테이블명 ADD COLUMN 컬럼명 자료형 [NULL OR NOT NULL]; -- 컬럼 추가
 ALTER TABLE author ADD COLUMN role VARCHAR(50);
 
-ALTER TABLE 테이블명 MODIFY COLUMN 컬럼명 타입 [제약조건]; -- 필드 타입 변경
+ALTER TABLE 테이블명 MODIFY COLUMN 컬럼명 타입 [제약조건]; -- 필드 타입 변경 (덮어씌움 수정x)
 ALTER TABLE author MODIFY COLUMN name VARCHAR(100) NOT NULL;
 
 ALTER TABLE 테이블명 CHANGE COLUMN 기존컬럼명 새로운컬럼명 타입 [제약조건]; -- 컬럼 이름 변경
@@ -63,3 +63,23 @@ ALTER TABLE 테이블명 DROP COLUMN 컬럼명; -- 컬럼 삭제
 ALTER TABLE author DROP COLUMN test1;
 
 --DROP 
+DROP TABLE 테이블명; -- 테이블 삭제
+
+IF EXISTS 
+
+-- post 테이블에 contents 컬럼 글자수 300으로 변경
+ALTER TABLE post MODIFY COLUMN contents VARCHAR(300);
+-- author 테이블에 address 컬럼 VARCHAR(255)로 추가
+ALTER TABLE author ADD COLUMN address VARCHAR(255);
+-- post테이블 생성문 미리 확인 -> 삭제 -> 재생성
+DROP TABLE post; 
+-- CREATE TABLE `post` (
+--    `id` int(11) NOT NULL,
+--    `title` varchar(255) DEFAULT NULL,
+--    `contents` varchar(300) DEFAULT NULL,
+--    `author_id` int(11) DEFAULT NULL,
+--    PRIMARY KEY (`id`),
+--    KEY `author_id` (`author_id`),
+--    CONSTRAINT `post_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`)
+--  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+-- 재생성 
