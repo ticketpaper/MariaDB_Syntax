@@ -27,15 +27,6 @@ SHOW INDEX FROM posts; -- 테이블 index 조회
 -- 인덱스 타입 : BTREE : 트리구조 -> 성능 관련
 
 SHOW CREATE TABLE posts; -- 테이블 생성문 조회
--- CREATE TABLE `posts` (
---    `id` int(11) NOT NULL,
---    `title` varchar(255) DEFAULT NULL,
---    `content` varchar(255) DEFAULT NULL,
---    `author_id` int(11) DEFAULT NULL,
---    PRIMARY KEY (`id`),
---    KEY `author_id` (`author_id`),
---    CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `author` (`id`)
---  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 
 -- posts 테이블 생성
 CREATE TABLE posts(id INT PRIMARY KEY,
@@ -65,6 +56,6 @@ ALTER TABLE author DROP COLUMN test1;
 --DROP 
 DROP TABLE 테이블명; -- 테이블 삭제
 
-DROP TABLE IF EXISTS 테이블명; -- 해당 테이블이 존재하면 삭제함 
+DROP TABLE IF EXISTS 테이블명; -- 해당 테이블이 존재하면 명령어 실행
 -- 오류방지, 스크립트 만들때 
 

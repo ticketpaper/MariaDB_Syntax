@@ -41,4 +41,24 @@ WHERE id > 1 ;
 SELECT * FROM author
 WHERE id > 2 AND name = 'abc';
 
+-- 이름 중복제거하고 조회
+SELECT DISTINCT name FROM author;
 
+-- 정렬 (오름차순: ASC, 내림차순: DESC)
+-- 여러 필드의 데이터를 쉼표(,)를 사용하여 여러기준으로 정렬할 수도있다
+-- order by 생략시 pk를 기준으로 오름차순 정렬하여 결과값반환
+
+SELECT * FROM author order by name desc; --이름으로 내림차순
+-- order by 멀티 : 먼저쓴 컬럼 우선 정렬, asc/desc 생략시 asc
+SELECT * FROM author order by name , email desc;
+
+-- limit number : 특정숫자로 결과값 개수 제한
+SELECT * FROM author order by id desc limit 4;
+
+-- 별칭(alias)을 이용한 처리
+-- 테이블과 필드에 임시로 별칭을 부여하고 해당 별칭으로 조회
+SELECT 필드이름 AS 별칭 FROM 테이블명;
+SELECT 필ㄷ이름 FROM 테이블명 AS 별칭;
+
+SELECT name AS 이름 from author; -- AS 생략 가능
+SELECT name, email from author as a;
