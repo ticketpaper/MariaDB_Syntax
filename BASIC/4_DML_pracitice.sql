@@ -52,8 +52,8 @@ INSERT INTO author (id, name, email,password)
 VALUES (3, 'RYU', 'RYU@naver.com','369');
 INSERT INTO author (id, name, email,password)  
 VALUES (4, 'CHOI', 'CHOI@naver.com','369');
-INSERT INTO author (id, name, email,password,role) 
-VALUES (5, 'BEAK', 'BEAK@naver.com','33124122', '123');
+INSERT INTO author (id, name, email,password) 
+VALUES (5, 'BEAK', 'BEAK@naver.com','33124122');
 
 -- 게시판에 실명으로 글이 쓰여진 게시글은 총 3건, 익명으로 쓰여진 글은 2건이 있도록 INSERT
 INSERT INTO post (id, title, contents, author_id)
