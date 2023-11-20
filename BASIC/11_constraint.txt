@@ -1,0 +1,86 @@
+데이터를 입력받을 때 실행되는 검사 규칙
+CREATE문으로 테이블을 생성 또는 ALTER문으로 필드를 추가할 때 설정
+
+종류
+1. NOT NULL
+    - default값은 nullable
+    - nout null 제약 조건이 설정된 필드는 무조건 데이터를 가지고 있어야 한다.
+
+    - AUTO_INCREMENT 키워드
+        - 새로운 레코드가 추가될 때마다 1씩 증가된 값을 저장
+        ALTER TABLE 테이블명 MODIFY column 필드명 필드타입 auto_increment;
+
+2. PRIMARY KEY (기본키)
+    - NOT NULL, UNIQUE 특징을 갖는다.
+    - 유일하게 식별 가능한 키
+
+    - PK 추가 방법 1
+        ALTER TABLE 테이블명 MODIFY column 필드명 필드타입 PRIMARY KEY
+    - PK 추가 방법 2
+        ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 PRIMARY KEY (필드이름)
+
+3. FORIGEN KEY (외래키)
+    - 기준이 되는 다른 테이블의 내용을 참조해서 레코드가 입력
+    - 하나의 테이블을 다른 테이블에 의존하게 만드는 것
+    - 다른 테이블의 필드는 반드시 UNIQUE나 PRIMARY KEY 제약조건이어야한다.
+
+    - 제약조건
+        - 참조되는 테이블에서 데이터의 수정이나 삭제가 발생시 영향
+        - ON DELETE, ON UPDATE
+        - 기본값은 DELETE, UPDATE 모두 restrict 옵션이 걸려있으므로, 변경시 각각 지정 필요
+
+        - 위 설정시 동작옵션
+            - CASCADE : 참조되는 테이블에서 데이터를 삭제/수정하면 같이 삭제/수정
+            - SET NULL : 참조되는 테이블에서 데이터를 삭제/수정하면 데이터는 NULL로 변경
+            - RESTRICT : fk로 잡은 테이블에 데이터가 남아있으면, fk대상 데이터 수정/삭제 불가,
+                         동작옵션을 주지 않으면 기본은 RESTRICT
+
+
+4. UNIQUE
+    - UNIQUE 제약 조건을 설정하면, 해당 필드는 값이 UNIQUE해야함을 의미
+
+    - 테이블 생성시 제약조건 추가 방법
+        CREATE TABLE 테이블명(필드이름 필드타입, ... , [CONSTRAINT 제약조건명] UNIQUE (필드이름));
+
+    - 제약조건 추가 방법 1
+        ALTER TABLE 테이블명 MODIFY COLUMN 필드명 필드타입 UNIQUE;
+    - 제약조건 추가 방법 2 
+        ALTER TABLE 테이블명 ADD CONSTRAINT 제약조건명 UNIQUE(필드명);
+
+    - UNIQUE 제약 조건을 설정하면, 해당 필드는 자동으로 인덱스(INDEX)로 설정
+    - 인덱스를 잘못걸었을때 성능저하가 발생함
+        - index 조회 : show index from 테이블명;
+        - index 삭제 : ALTER TABLE 테이블명 DROP INDEX 인덱스명;
+    - 제약조건 삭제시 index 삭제, index 삭제시 제약조건 삭제
+
+5. DEFAULT
+    - 데이터를 입력할 떄 해당 필드값을 전달하지 않으면, 자동으로 설정된 기본값을 저장
+    - 시간 세팅시 가장 많이 사용한다
+        - alter table author add create_at DATETIME defalut CURRENT_TIMESTAMP;
+        - alter table post add create_at DATETIME defalut CURRENT_TIMESTAMP;
+
+6. 흐름제어
+ - CASE
+    CASE value
+    WHEN [compare_vlaue1] THEN result1 
+    WHEN [compare_vlaue2] THEN result2 ...
+    else result3
+    END
+
+    -CASE와 END로 이루어져있고, 원하는 조건내에 존재하지 않으면 else문을 타고, 
+    else문이 없을 경우 null을 return
+ 
+ - IF()
+    IF(a,b,c)
+    - a는 조건, b는 참일경우 반환값, c는 거짓일경우 반환값
+    - 만약 a조건이 참이면 b를 반환, 거짓이면 c를 반환한다.
+    select if(0<1, 'yes','no'); => yes
+ 
+ - IFNULL(a,b)
+    - 만약 a의 값이 null이 아니면, a 그 자체를 반환, null이면 b를 반환
+    - select id, title, contents, ifnull(author_id, 'anonymous') from post;
+      => author_id값이 null이 아니면 값을 반환 null이면 anonymous 반환
+    
+
+
+
