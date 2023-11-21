@@ -17,6 +17,8 @@ SELECT * FROM tableA a LEFT JOIN tableB b ON a.id = b.a_id
 SELECT * FROM author a LEFT JOIN post p ON a.id = p.author_id;
 
 -- UNION
--- 중복을 제거함
+-- 여러 개의 SELECT 문의 결과를 하나의 테이블이나 결과 집합으로 표현
+-- 각각의 SELECT 문으로 선택된 필드의 개수와 타입은 모두 일치해야함
+-- 중복이 있으면 제거하고 출력
 SELECT 컬럼1, 컬럼2 FROM TABLE1 UNION SELECT 컬럼1, 컬럼2 FROM TABLE2;
 

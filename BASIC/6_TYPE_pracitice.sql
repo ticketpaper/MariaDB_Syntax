@@ -18,7 +18,7 @@ Select hex(myimg) from table_blob Where id =1;
 
 -- role타입을 enum타입으로 변경하고 'user', 'admin'으로 지정, not null로 설정하되
 -- 입력이 없을시에는 'user'로 세팅되도록 default 설정
-ALTER TABLE author MODIFY COLUMN role ENUM('user', 'admin') not null default 'user';
+ALTER TABLE author MODIFY COLUMN rol    e ENUM('user', 'admin') not null default 'user';
 -- admin으로 데이터 세팅후 insert
 INSERT INTO author(id, name, role) values (1, 'LEE', 'admin');
 -- super-user 데이터로 insert
