@@ -27,6 +27,7 @@ from post
 group by author_id;
 
 -- HAVING 절
+-- group by된 데이터들의 대한 조건
 
 -- author_id별로 price 평균값을 구하시오.
 -- 단, 건별로 2000원 이상인 데이터만 평균을 내서 출력하시오
@@ -53,5 +54,8 @@ having avg(price) >= 2000;
 WITH RECURSIVE number_sqeunce(HOUR) AS(
     SELECT 0
     UNION ALL
-    SELECT HOUR + 1 FROM number_sqeunce WHERE HOUR<23
+    SELECT HOUR + 1 FROM number_sqeunce 
+    WHERE HOUR<23
 )select HOUR, 0 as COUNT from number_sqeunce
+
+
