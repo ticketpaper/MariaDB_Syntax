@@ -36,7 +36,7 @@ flush privileges;
 : 데이터베이스의 테이블과 유사한 구조를 가지지만, 가상의 테이블로서
   실제 데이터를 저장하지 않는 데이터베이스. 실제 데이터베이스를 참조만 한다.
 
-- 문법
+-- 뷰 생성 문법
 CREATE VIEW 뷰이름 AS
 SELECT 컬럼1, 컬럼2, ...
 FROM 테이블명;
@@ -45,3 +45,7 @@ FROM 테이블명;
 CREATE VIEW author_view AS
 SELECT name, email
 FROM author;
+
+
+
+
