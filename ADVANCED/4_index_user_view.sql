@@ -13,7 +13,7 @@ CREATE INDEX index_name ON 테이블명(컬럼명);
 CREATE INDEX index_name ON 테이블명(컬럼1, 컬럼2);
 
 
--- 사용자 관리
+-- DCL (데이터 정의어) : 사용자 관리
 -- 사용자 조회
 select * from mysql.user;
 -- 사용자 생성
